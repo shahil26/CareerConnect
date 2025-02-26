@@ -1,4 +1,4 @@
-import { Job_API_END_POINT } from "@/components/utils/constant";
+import { JOB_API_END_POINT } from "@/components/utils/constant";
 import { setAllJobs, setSearchedQuery } from "@/redux/jobSlice";
 import axios from "axios";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ const useGetAllJobs = () => {
     const fetchAllJobs = async () => {
       try {
         if (allJobs.length === 0) { // ✅ Fetch only if no jobs exist
-          const res = await axios.get(`${Job_API_END_POINT}/get`, {
+          const res = await axios.get(`${JOB_API_END_POINT}/get`, {
             withCredentials: true,
           });
 

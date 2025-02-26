@@ -4,7 +4,7 @@ import { Button } from "./ui/button"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { setSingleJob } from "../redux/jobSlice"
-import { APPLICATION_API_END_POINT, Job_API_END_POINT } from "./utils/constant"
+import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from "./utils/constant"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "sonner"
 
@@ -39,7 +39,7 @@ const JobDescription = () => {
   useEffect(() => {
     const fetchSingleJob = async () => {
       try {
-        const res = await axios.get(`${Job_API_END_POINT}/get/${jobId}`, {
+        const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, {
           withCredentials: true,
         })
         if (res.data.success) {

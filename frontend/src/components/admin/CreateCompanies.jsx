@@ -1,27 +1,25 @@
-import React, { useState } from "react";
-import Navbar from "../shared/Navbar";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { COMPANY_API_END_POINT } from "../utils/constant";
-import { toast } from "sonner";
-import { useDispatch } from "react-redux";
-import { setSingleCompany } from "@/redux/companySlice";
-import { motion } from "framer-motion";
-import { setSearchCompanyByText } from "@/redux/companySlice";
-
+import React, { useState } from "react"
+import Navbar from "../shared/Navbar"
+import { Label } from "../ui/label"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { COMPANY_API_END_POINT } from "../utils/constant"
+import { toast } from "sonner"
+import { useDispatch } from "react-redux"
+import { setSingleCompany } from "@/redux/companySlice"
+import { motion } from "framer-motion"
 
 const CreateCompanies = () => {
-  const navigate = useNavigate();
-  const [companyName, setCompanyName] = useState("");
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const [companyName, setCompanyName] = useState("")
+  const dispatch = useDispatch()
 
   const registerNewCompany = async () => {
     if (!companyName.trim()) {
-      toast.error("Company name cannot be empty.");
-      return;
+      toast.error("Company name cannot be empty.")
+      return
     }
 
     try {
@@ -34,18 +32,18 @@ const CreateCompanies = () => {
           },
           withCredentials: true,
         }
-      );
+      )
       if (res?.data?.success) {
-        dispatch(setSingleCompany(res.data.company));
-        toast.success(res.data.message);
-        const companyId = res?.data?.company?._id;
-        navigate(`/admin/companies/create/${companyId}`);
+        dispatch(setSingleCompany(res.data.company))
+        toast.success(res.data.message)
+        const companyId = res?.data?.company?._id
+        navigate(`/admin/companies/create/${companyId}`)
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong! Please try again.");
+      console.log(error)
+      toast.error("Something went wrong! Please try again.")
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -63,16 +61,20 @@ const CreateCompanies = () => {
         >
           {/* Header Section */}
           <div className="text-center mb-6">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Create Your Company</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+              Create Your Company
+            </h1>
             <p className="text-gray-500 mt-2 text-sm sm:text-base">
-              Build your company's profile in just a few steps. Enter a name for your 
-              company to get started. You can always modify it later.
+              Build your company's profile in just a few steps. Enter a name for
+              your company to get started. You can always modify it later.
             </p>
           </div>
 
           {/* Input Field */}
           <div className="mb-4">
-            <Label className="text-gray-700 font-medium text-sm sm:text-base">Company Name</Label>
+            <Label className="text-gray-700 font-medium text-sm sm:text-base">
+              Company Name
+            </Label>
             <Input
               type="text"
               placeholder="Enter company name (e.g., JobHunt, Microsoft, etc.)"
@@ -87,10 +89,12 @@ const CreateCompanies = () => {
 
           {/* Information Section */}
           <div className="bg-gray-50 p-3 sm:p-4 rounded-md mb-6 border border-gray-200 text-xs sm:text-sm">
-            <h2 className="text-sm sm:text-md font-semibold text-gray-700">Why is this important?</h2>
+            <h2 className="text-sm sm:text-md font-semibold text-gray-700">
+              Why is this important?
+            </h2>
             <p className="mt-1 text-gray-600">
-              Your company name is how your business will be identified within our platform.
-              Make sure it's professional and easy to remember!
+              Your company name is how your business will be identified within
+              our platform. Make sure it's professional and easy to remember!
             </p>
           </div>
 
@@ -119,7 +123,7 @@ const CreateCompanies = () => {
         </motion.div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateCompanies;
+export default CreateCompanies
