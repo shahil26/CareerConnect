@@ -1,4 +1,4 @@
-const BASE_URL = "https://career-connect-seven.vercel.app/";
+const BASE_URL = "https://career-connect-seven.vercel.app";
 
 export const USER_API_END_POINT = `${BASE_URL}/api/v1/user`;
 export const JOB_API_END_POINT = `${BASE_URL}/api/v1/job`;
