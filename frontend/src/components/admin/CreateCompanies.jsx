@@ -8,8 +8,10 @@ import axios from "axios";
 import { COMPANY_API_END_POINT } from "../utils/constant";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
-import { setSingleCompany } from "../redux/companySlice";
+import { setSingleCompany } from "@/redux/companySlice";
 import { motion } from "framer-motion";
+import { setSearchCompanyByText } from "@/redux/companySlice";
+
 
 const CreateCompanies = () => {
   const navigate = useNavigate();
