@@ -16,9 +16,15 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 app.use(cookieParser())
 
-const corsOptions = { origin: ["http://localhost:5173","https://career-connect-k57e.vercel.app"]};
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://career-connect-k57e.vercel.app"],
+  credentials: true, // ✅ Lowercase 'credentials'
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // ✅ Handles preflight requests
 
-app.use(cors(corsOptions))
 
 const PORT = process.env.PORT || 3000
 
