@@ -11,17 +11,17 @@ const useGetAllJobs = () => {
   useEffect(() => {
     const fetchAllJobs = async () => {
       try {
-        if (allJobs.length === 0) { // ✅ Fetch only if no jobs exist
+        // if (allJobs.length === 0) {
           const res = await axios.get(`${JOB_API_END_POINT}/get`, {
             withCredentials: true,
           });
 
+          console.log("Fetched all jobs:", res.data.jobs);
           if (res.data.success) {
-            console.log("Fetched all jobs:", res.data.jobs);
             dispatch(setAllJobs(res.data.jobs));
             dispatch(setSearchedQuery("")); // ✅ Reset search on fresh fetch
           }
-        }
+        // }
       } catch (error) {
         console.error("Error fetching jobs:", error);
       }
