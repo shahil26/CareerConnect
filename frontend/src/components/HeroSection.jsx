@@ -2,10 +2,10 @@ import { useState } from "react"
 import { Search, Briefcase } from "lucide-react"
 import { motion } from "framer-motion"
 import { useDispatch } from "react-redux"
-import { setSearchedQuery } from "@/redux/jobSlice"
+import { setSearchedQuery } from "../redux/jobSlice"
 import { useNavigate } from "react-router-dom"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "../components/ui/button"
+import { Input } from "../components/ui/input"
 
 export default function HeroSection() {
   const [search, setSearch] = useState("")

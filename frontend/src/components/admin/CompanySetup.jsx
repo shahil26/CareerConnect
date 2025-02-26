@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
-import useGetCompanyById from "@/Hooks/useGetCompanyByid";
+import useGetCompanyById from "../Hooks/useGetCompanyByid";
 import { motion } from "framer-motion";
 
 const CompanySetup = () => {

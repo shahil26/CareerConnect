@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSearchedQuery } from "@/redux/jobSlice";
+import { setSearchedQuery } from "../redux/jobSlice";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
-import { Checkbox } from "@/components/ui/checkbox"; // ✅ Fixed import
+import { Checkbox } from "../components/ui/checkbox"; // ✅ Fixed import
 import { Button } from "./ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
