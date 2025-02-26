@@ -3,14 +3,14 @@ import Navbar from "../shared/Navbar"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import CompaniesTable from "./CompaniesTable"
-import { useNavigate } from "react-router-dom"
-import useGetAllCompanies from "../Hooks/useGetAllCompanies"
+import { useNavigate } from "react-router-dom""
 import { useDispatch } from "react-redux"
 import { setSearchCompanyByText } from "../redux/companySlice"
 import { motion } from "framer-motion"
+import useGetAllCompanies from "@/Hooks/useGetAllCompanies"
 
 const Companies = () => {
-  useGetAllCompanies()
+  useGetAllCompanies
   const navigate = useNavigate()
   const [input, setInput] = useState("")
   const dispatch = useDispatch()
