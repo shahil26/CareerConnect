@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
 app.use(cookieParser())
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://career-connect-k57e.vercel.app"],
+  origin: ["https://career-connect-k57e.vercel.app/"],
   credentials: true, // ✅ Lowercase 'credentials'
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
