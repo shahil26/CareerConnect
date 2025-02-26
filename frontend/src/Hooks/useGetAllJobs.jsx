@@ -17,6 +17,7 @@ const useGetAllJobs = () => {
           });
 
           if (res.data.success) {
+            console.log("Fetched all jobs:", res.data.jobs);
             dispatch(setAllJobs(res.data.jobs));
             dispatch(setSearchedQuery("")); // ✅ Reset search on fresh fetch
           }

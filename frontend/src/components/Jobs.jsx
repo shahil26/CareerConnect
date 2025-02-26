@@ -11,6 +11,7 @@ const Jobs = () => {
 
   useEffect(() => {
     if (searchedQuery.trim() === "" || searchedQuery === "All Jobs") {
+      console.log("allJobs", allJobs);
       setFilterJobs(allJobs);
     } else {
       const filteredJobs = allJobs.filter((job) => {
@@ -20,6 +21,7 @@ const Jobs = () => {
           job.location?.toLowerCase().includes(searchedQuery.toLowerCase())
         );
       });
+      console.log("filteredJobs", filteredJobs);
       setFilterJobs(filteredJobs);
     }
   }, [allJobs, searchedQuery]);
