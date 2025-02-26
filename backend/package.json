@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js",
-    "build": "npm run build"
+    "start": "node server.js",
+  "build": "echo 'No build step needed'",
+  "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
