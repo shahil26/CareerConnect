@@ -55,7 +55,7 @@ Ensure you have the following installed:
    npm start
    ```
 6. **Open the application:**
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+   Open [(https://career-connect-k57e.vercel.app/)](https://career-connect-k57e.vercel.app/) in your browser.
 
 ## Folder Structure
 ```
@@ -81,5 +81,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 For any inquiries or suggestions, feel free to reach out at **shahilsrivastava7@gmail.com**.
 
-Made with ❤️ by [Kumar Shahil]
+Made with ❤️ by Kumar Shahil
 
