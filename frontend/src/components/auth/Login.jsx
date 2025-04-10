@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -22,38 +22,47 @@ const Login = () => {
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+  // const hasNavigatedRef = useRef(false);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (!input.email || !input.password || !input.role) {
-      toast.error("Please fill all fields.");
-      return;
+// useEffect(() => {
+//   if (user && !hasNavigatedRef.current) {
+//     hasNavigatedRef.current = true;
+//     navigate("/");
+//   }
+// }, [user, navigate]);
+  
+
+const submitHandler = async (e) => {
+  e.preventDefault();
+
+  if (loading) return; // Prevent multiple submissions
+
+  if (!input.email || !input.password || !input.role) {
+    toast.error("Please fill all fields.");
+    return;
+  }
+
+  try {
+    dispatch(setLoading(true));
+    const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
+
+    if (res.data.success) {
+      dispatch(setUser(res.data.user));
+      toast.success(res.data.message);
+      navigate("/"); // ✅ Move navigation here to avoid repeated redirects
     }
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Login failed!");
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
 
-    try {
-      dispatch(setLoading(true));
-      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
 
-      if (res.data.success) {
-        dispatch(setUser(res.data.user));
-        navigate("/");
-        toast.success(res.data.message);
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed!");
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
+  
 
   return (
     <div className="min-h-screen bg-white flex flex-col">

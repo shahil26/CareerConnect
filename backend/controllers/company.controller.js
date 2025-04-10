@@ -35,6 +35,9 @@ export const registerCompany = async (req, res) => {
 export const getCompany = async (req, res) => {
   try {
     const companies = await company.find({ userId: req.id })
+    // console.log("Fetching companies for user ID:", req.id) 
+    console.log("✅ Authenticated user ID:", req.id);
+
     if (!companies) {
       return res
         .status(404)

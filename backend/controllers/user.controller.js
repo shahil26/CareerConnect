@@ -43,7 +43,6 @@ export const register = async (req, res) => {
       }
     })
 
-    console.log("hi2")
     return res
       .status(201)
       .json({ message: "User registered successfully", success: true })
@@ -100,9 +99,10 @@ export const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "strict",
+        secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS in production
+        sameSite: 'Lax', // 'Lax' is a good default. Use 'None' only if needed for cross-site requests (requires secure: true). 'Strict' is more restrictive.
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .json({ message: `Welcome back ${user.fullname}`, user, success: true })
   } catch (error) {
@@ -198,7 +198,7 @@ export const updateProfile = async (req, res) => {
         })
         const fileUri = getDataUri(file) // Convert file to data URI
         const cloudResponse = await cloudinary.uploader.upload(fileUri, {
-          resource_type: "auto", // Automatically detect file type
+          resource_type: "raw",
         })
 
         resumeUrl = cloudResponse.secure_url

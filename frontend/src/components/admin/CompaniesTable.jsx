@@ -13,23 +13,49 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Edit2, MoreHorizontal, Building2 } from "lucide-react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { COMPANY_API_END_POINT } from "@/components/utils/constant"
+
 
 const CompaniesTable = () => {
-  const { companies = [] } = useSelector((store) => store.company || {})
-  const { searchCompanyByText } = useSelector((store) => store.company)
-  const [filterCompany, setFilterCompany] = useState(companies)
+  // const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const { searchCompanyByText } = useSelector((store) => store.company)
+  const [companies, setCompanies] = useState([])
+  const [filterCompany, setFilterCompany] = useState(companies)
+  const [loading, setLoading] = useState(true)
+
+  // 👇 Fetch companies on component mount
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const res = await axios.get(`${COMPANY_API_END_POINT}/get`, {
+          withCredentials: true,
+        })
+        console.log("Companies1:", res.data.companies)
+        
+        if (res.data.success) {
+          setCompanies(res.data.companies)
+          // dispatch()
+        }
+      } catch (error) {
+        console.error("Error fetching companies:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchCompanies()
+  }, [])
+
+  // 👇 Filter companies when companies or search text changes
   useEffect(() => {
     const filteredCompany =
       companies.length >= 0 &&
       companies.filter((company) => {
-        if (!searchCompanyByText) {
-          return true
-        }
-        return company?.name
-          ?.toLowerCase()
-          .includes(searchCompanyByText.toLowerCase())
+        if (!searchCompanyByText) return true
+        return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase())
       })
     setFilterCompany(filteredCompany)
   }, [companies, searchCompanyByText])
@@ -51,7 +77,7 @@ const CompaniesTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {companies.length === 0 ? (
+            {filterCompany.length === 0 ? (
               <TableRow>
                 <TableCell colSpan="4" className="text-center py-4 text-gray-500">
                   You haven't registered any companies yet.

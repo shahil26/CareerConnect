@@ -68,7 +68,7 @@ export const getAllJobs = async (req, res) => {
       jobs = await Job.find().populate("company")
     }
 
-    console.log("Filtered Jobs:", jobs) // ✅ Debugging
+    // console.log("Filtered Jobs:", jobs)
     res.status(200).json({ success: true, jobs })
   } catch (error) {
     console.error("Error fetching jobs:", error)

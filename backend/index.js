@@ -8,23 +8,27 @@ import companyRoute from "./routes/company.route.js"
 import jobRoute from "./routes/job.route.js"
 import applicationRoute from "./routes/application.route.js"
 
+
 dotenv.config({})
 
 const app = express()
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true })) // to support URL-encoded bodies
-app.use(cookieParser())
-
 const corsOptions = {
   origin: ["https://career-connect-k57e.vercel.app", 
-    "https://career-connect-k57e-8kzgtqdll-shahil26s-projects.vercel.app"],
-  credentials: true, // ✅ Lowercase 'credentials'
+    "https://career-connect-k57e-8kzgtqdll-shahil26s-projects.vercel.app", "http://localhost:5173"],
+  credentials: true, 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
+
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ✅ Handles preflight requests
+app.options("*", cors(corsOptions)); 
+
+app.use(cookieParser())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true })) 
+
+
 
 
 const PORT = process.env.PORT || 3000

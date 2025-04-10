@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Navbar from "../shared/Navbar"
 import { Label } from "@radix-ui/react-label"
 import { Input } from "../ui/input"
@@ -18,6 +18,7 @@ import { JOB_API_END_POINT } from "../utils/constant"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 import { Loader2 } from "lucide-react"
+import { COMPANY_API_END_POINT } from "@/components/utils/constant"
 
 const PostJob = () => {
   const [input, setInput] = useState({
@@ -33,8 +34,31 @@ const PostJob = () => {
   })
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const [companies, setCompanies] = useState([])
 
-  const { companies = [] } = useSelector((store) => store.company || {})
+  // const { companies = [] } = useSelector((store) => store.company || {})
+
+    useEffect(() => {
+      const fetchCompanies = async () => {
+        try {
+          const res = await axios.get(`${COMPANY_API_END_POINT}/get`, {
+            withCredentials: true,
+          })
+          console.log("Companies1:", res.data.companies)
+          
+          if (res.data.success) {
+            setCompanies(res.data.companies)
+            // dispatch()
+          }
+        } catch (error) {
+          console.error("Error fetching companies:", error)
+        } finally {
+          setLoading(false)
+        }
+      }
+  
+      fetchCompanies()
+    }, [])
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })

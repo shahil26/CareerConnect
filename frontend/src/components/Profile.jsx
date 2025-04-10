@@ -99,13 +99,24 @@ const Profile = () => {
           <div className="mt-5">
             <Label className="text-md font-semibold text-gray-800">Resume</Label>
             {user?.profile?.resumeOriginalName ? (
+              <div>
               <a
-                target="_blank"
-                href={user?.profile?.resume}
+              target="_blank"
+              href={`https://docs.google.com/viewer?url=${encodeURIComponent(user?.profile?.resume)}&embedded=true`}
+              rel="noopener noreferrer"
                 className="text-blue-500 hover:underline cursor-pointer block mt-1 text-sm sm:text-base"
               >
                 {user.profile.resumeOriginalName}
               </a>
+              
+              <iframe
+                src={`https://docs.google.com/viewer?url=${encodeURIComponent(user?.profile?.resume)}&embedded=true`}
+                width="100%"
+                height="300"
+                title="Resume Preview"
+                className="border-0"
+              />
+              </div>
             ) : (
               <span className="text-gray-500 text-sm sm:text-base">NA</span>
             )}

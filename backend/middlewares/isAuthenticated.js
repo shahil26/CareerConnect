@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 const isAuthenticated = async (req, res, next) => {
   try {
     const token = req.cookies.token
+    console.log("Token from cookie:", token); // Log the token for debugging
     if (!token) {
       console.log("No token found");
       return res
