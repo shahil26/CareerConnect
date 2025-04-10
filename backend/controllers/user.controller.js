@@ -99,9 +99,9 @@ export const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS in production
-        sameSite: 'Lax', // 'Lax' is a good default. Use 'None' only if needed for cross-site requests (requires secure: true). 'Strict' is more restrictive.
+         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',  // ✅ HTTPS only in prod
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',  // ✅ Required for cross-origin
         maxAge: 24 * 60 * 60 * 1000,
       })
       .json({ message: `Welcome back ${user.fullname}`, user, success: true })
