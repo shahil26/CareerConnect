@@ -15,7 +15,7 @@ const app = express()
 
 const corsOptions = {
   origin: ["https://career-connect-amber.vercel.app", 
-    "http://localhost:5173"],
+    "http://localhost:5173","https://careerconnect-1-dqxi.onrender.com"],
   credentials: true, 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
